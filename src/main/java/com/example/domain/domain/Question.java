@@ -13,9 +13,7 @@ public class Question {
     @GeneratedValue
     @Column(name = "question_id")
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bnt_id")
-    private Bnt bnt;
+
 
     @Column(name = "image_url")
     private URL imageUrl;

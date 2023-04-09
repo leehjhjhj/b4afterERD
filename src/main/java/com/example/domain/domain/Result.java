@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.net.URL;
 
 @Entity
 @Getter @Setter
@@ -17,13 +18,21 @@ public class Result {
     private Question question;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_bnt_info_id")
-    private UserBntInfo userBntInfo;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
-    @Column(name = "is_correct")
-    private Boolean isCorrect;
+    @Enumerated(EnumType.STRING)
+    private AnswerStatus answerStatus;
 
-    @Column(name = "recognized_word")
-    private String recognizedWord;
+    private URL audio;
+
+    public static Result createResult(Question question, Member member, URL audio) {
+        Result result = new Result();
+        result.setQuestion(question);
+        result.setMember(member);
+        result.setAudio(audio);
+        result.setAnswerStatus(AnswerStatus.WAITING);
+        return result;
+    }
 
 }
