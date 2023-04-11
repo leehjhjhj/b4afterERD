@@ -16,7 +16,12 @@ public class Question {
 
 
     @Column(name = "image_url")
-    private URL imageUrl;
+    private String imageUrl;
 
     private String answer;
+
+    public Question(String imageUrl, String answer) {
+        this.imageUrl = imageUrl;
+        this.answer = answer;
+    }
 }

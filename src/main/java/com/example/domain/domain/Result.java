@@ -24,9 +24,9 @@ public class Result {
     @Enumerated(EnumType.STRING)
     private AnswerStatus answerStatus;
 
-    private URL audio;
+    private String audio;
 
-    public static Result createResult(Question question, Member member, URL audio) {
+    public static Result createResult(Question question, Member member, String audio) {
         Result result = new Result();
         result.setQuestion(question);
         result.setMember(member);
