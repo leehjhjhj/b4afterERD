@@ -1,13 +1,15 @@
 package com.example.domain.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.net.URL;
 
 @Entity
-@Getter @Setter
+@Getter
+@NoArgsConstructor
 public class Question {
     @Id
     @GeneratedValue

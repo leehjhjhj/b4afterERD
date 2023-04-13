@@ -1,6 +1,7 @@
 package com.example.domain.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter @Setter
 @Table(name = "member")
+@NoArgsConstructor
 public class Member {
     @Id
     @GeneratedValue
@@ -16,11 +18,11 @@ public class Member {
     private Long id;
 
     private int age;
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 
     public Member(int age) {
         this.age = age;
-        this.createAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
     }
     // 데이터가 없는 경우가 있음
     public double getAverage() {
