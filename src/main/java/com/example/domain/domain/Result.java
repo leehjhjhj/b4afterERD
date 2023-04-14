@@ -1,5 +1,6 @@
 package com.example.domain.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,12 +15,13 @@ public class Result {
     @Id @GeneratedValue
     @Column(name = "result_id")
     private Long id;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
     private Question question;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -27,14 +29,26 @@ public class Result {
     private AnswerStatus answerStatus;
 
     private String audio;
-
+    // 스태틱 생성 메소드
     public static Result createResult(Question question, Member member, String audio) {
         Result result = new Result();
         result.setQuestion(question);
         result.setMember(member);
         result.setAudio(audio);
-        result.setAnswerStatus(AnswerStatus.WAITING);
+        result.setAnswerStatus(AnswerStatus.BEFORE);
         return result;
+    }
+
+    public char getOX() {
+        char outPutResult;
+        if (this.answerStatus == AnswerStatus.CORRECT) {
+            outPutResult = 'O';
+        } else if (this.answerStatus == AnswerStatus.INCORRECT) {
+            outPutResult = 'X';
+        } else {
+            outPutResult = '?';
+        }
+        return outPutResult;
     }
 
 }

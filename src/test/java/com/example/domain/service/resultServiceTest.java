@@ -28,9 +28,9 @@ public class resultServiceTest {
     @Test
     @Rollback(value = false)
     public void 결과생성() throws Exception {
-        Member member = new Member(66);
+        Member member = new Member(87);
         em.persist(member);
-        Question question = new Question("url.com", "정답");
+        Question question = new Question(6L, "url.com", "안경");
         em.persist(question);
         Result result = Result.createResult(question, member, "audio.com");
         resultRepository.save(result);

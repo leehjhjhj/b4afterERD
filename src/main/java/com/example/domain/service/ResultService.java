@@ -17,11 +17,11 @@ import java.util.List;
 public class ResultService {
     private final ResultRepositoryImpl resultRepository;
 
-//    @Transactional
-//    public void createResult(Question question, Member member, String audio) {
-//        Result result = Result.createResult(question, member, audio);
-//        resultRepository.save(result);
-//    }
+    @Transactional
+    public void createResult(Question question, Member member, String audio) {
+        Result result = Result.createResult(question, member, audio);
+        resultRepository.save(result);
+    }
 
     public List<Result> findResult(Long memberId) {
         return resultRepository.findByMemberId(memberId);

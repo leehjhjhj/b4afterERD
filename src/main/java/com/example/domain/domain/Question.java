@@ -12,7 +12,6 @@ import java.net.URL;
 @NoArgsConstructor
 public class Question {
     @Id
-    @GeneratedValue
     @Column(name = "question_id")
     private Long id;
 
@@ -22,7 +21,8 @@ public class Question {
 
     private String answer;
 
-    public Question(String imageUrl, String answer) {
+    public Question(Long id, String imageUrl, String answer) {
+        this.id = id;
         this.imageUrl = imageUrl;
         this.answer = answer;
     }
