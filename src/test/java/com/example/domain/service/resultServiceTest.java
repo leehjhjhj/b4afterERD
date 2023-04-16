@@ -1,5 +1,6 @@
 package com.example.domain.service;
 
+import com.example.domain.domain.AnswerStatus;
 import com.example.domain.domain.Member;
 import com.example.domain.domain.Question;
 import com.example.domain.domain.Result;
@@ -28,11 +29,13 @@ public class resultServiceTest {
     @Test
     @Rollback(value = false)
     public void 결과생성() throws Exception {
-        Member member = new Member(87);
-        em.persist(member);
-        Question question = new Question(6L, "url.com", "안경");
+        //Member member = new Member(87);
+        //em.persist(member);
+        Member member = em.find(Member.class, 1L);
+        Question question = new Question(4L, "url.com", "망나니");
         em.persist(question);
         Result result = Result.createResult(question, member, "audio.com");
+        result.setAnswerStatus(AnswerStatus.INCORRECT);
         resultRepository.save(result);
     }
 

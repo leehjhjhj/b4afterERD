@@ -1,6 +1,8 @@
 package com.example.domain.controller;
 
+import com.example.domain.domain.AnswerStatus;
 import com.example.domain.domain.Result;
+import com.example.domain.dto.ResultResponseDto;
 import com.example.domain.service.ResultService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,10 @@ import java.util.List;
 public class ResultController {
     private final ResultService resultService;
     @GetMapping("/result/{memberId}")
-    public ResponseEntity<List<Result>> getResultsByMemberId(@PathVariable Long memberId) {
+    public ResponseEntity<ResultResponseDto> getResultsByMemberId(@PathVariable Long memberId) {
         List<Result> results = resultService.findResult(memberId);
-        return ResponseEntity.ok().body(results);
+        ResultResponseDto response = new ResultResponseDto(results);
+        return ResponseEntity.ok().body(response);
     }
 
 }

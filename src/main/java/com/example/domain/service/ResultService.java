@@ -15,7 +15,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ResultService {
-    private final ResultRepositoryImpl resultRepository;
+    private final ResultRepository resultRepository;
 
     @Transactional
     public void createResult(Question question, Member member, String audio) {
@@ -26,4 +26,6 @@ public class ResultService {
     public List<Result> findResult(Long memberId) {
         return resultRepository.findByMemberId(memberId);
     }
+
+
 }
