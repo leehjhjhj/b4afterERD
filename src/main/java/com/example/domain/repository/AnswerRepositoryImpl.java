@@ -1,6 +1,6 @@
 package com.example.domain.repository;
 
-import com.example.domain.domain.Result;
+import com.example.domain.domain.Answer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -9,16 +9,16 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ResultRepositoryImpl implements ResultRepository{
+public class AnswerRepositoryImpl implements AnswerRepository {
 
     private final EntityManager em;
     @Override
-    public void save(Result result) {
-        em.persist(result);
+    public void save(Answer answer) {
+        em.persist(answer);
     }
     @Override
-    public List<Result> findByMemberId(Long memberId) {
-        return em.createQuery("select r from Result r where r.member.id = :memberId", Result.class)
+    public List<Answer> findByMemberId(Long memberId) {
+        return em.createQuery("select r from Answer r where r.member.id = :memberId", Answer.class)
                 .setParameter("memberId", memberId)
                 .getResultList();
     }

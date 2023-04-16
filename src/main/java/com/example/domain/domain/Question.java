@@ -19,11 +19,11 @@ public class Question {
     @Column(name = "image_url")
     private String imageUrl;
 
-    private String answer;
+    private String word;
 
-    public Question(Long id, String imageUrl, String answer) {
+    public Question(Long id, String imageUrl, String word) {
         this.id = id;
         this.imageUrl = imageUrl;
-        this.answer = answer;
+        this.word = word;
     }
 }

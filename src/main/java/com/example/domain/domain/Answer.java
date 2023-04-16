@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.net.URL;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor
-public class Result {
-    @Id @GeneratedValue
-    @Column(name = "result_id")
+public class Answer {
+    @Id
+    @GeneratedValue
+    @Column(name = "answer_id")
     private Long id;
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,27 +28,28 @@ public class Result {
     @Enumerated(EnumType.STRING)
     private AnswerStatus answerStatus;
 
+    @JoinColumn(name = "audio_url")
     private String audio;
     // 스태틱 생성 메소드
-    public static Result createResult(Question question, Member member, String audio) {
-        Result result = new Result();
-        result.setQuestion(question);
-        result.setMember(member);
-        result.setAudio(audio);
-        result.setAnswerStatus(AnswerStatus.BEFORE);
-        return result;
+    public static Answer createAnswer(Question question, Member member, String audio) {
+        Answer answer = new Answer();
+        answer.setQuestion(question);
+        answer.setMember(member);
+        answer.setAudio(audio);
+        answer.setAnswerStatus(AnswerStatus.BEFORE);
+        return answer;
     }
 
     public char getOX() {
-        char outPutResult;
+        char outPutAnswer;
         if (this.answerStatus == AnswerStatus.CORRECT) {
-            outPutResult = 'O';
+            outPutAnswer = 'O';
         } else if (this.answerStatus == AnswerStatus.INCORRECT) {
-            outPutResult = 'X';
+            outPutAnswer = 'X';
         } else {
-            outPutResult = '?';
+            outPutAnswer = '?';
         }
-        return outPutResult;
+        return outPutAnswer;
     }
 
 }

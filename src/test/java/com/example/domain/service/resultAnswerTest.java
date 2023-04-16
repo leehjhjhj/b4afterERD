@@ -3,8 +3,8 @@ package com.example.domain.service;
 import com.example.domain.domain.AnswerStatus;
 import com.example.domain.domain.Member;
 import com.example.domain.domain.Question;
-import com.example.domain.domain.Result;
-import com.example.domain.repository.ResultRepository;
+import com.example.domain.domain.Answer;
+import com.example.domain.repository.AnswerRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +18,30 @@ import javax.persistence.EntityManager;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Transactional
-public class resultServiceTest {
+public class resultAnswerTest {
     @Autowired
-    ResultService resultService;
+    AnswerService answerService;
     @Autowired
-    ResultRepository resultRepository;
+    AnswerRepository answerRepository;
     @Autowired
     EntityManager em;
 
     @Test
     @Rollback(value = false)
-    public void 결과생성() throws Exception {
-        //Member member = new Member(87);
-        //em.persist(member);
-        Member member = em.find(Member.class, 1L);
-        Question question = new Question(4L, "url.com", "망나니");
-        em.persist(question);
-        Result result = Result.createResult(question, member, "audio.com");
-        result.setAnswerStatus(AnswerStatus.INCORRECT);
-        resultRepository.save(result);
+    public void 유저생성() throws Exception {
+        Member member = new Member(78);
+        em.persist(member);
     }
+    @Test
+    @Rollback(value = false)
+    public void 결과생성() throws Exception {
+        Member member = em.find(Member.class, 1L);
+        Question question = new Question(4L, "url.com", "김치");
+        em.persist(question);
+        Answer answer = Answer.createAnswer(question, member, "audio.com");
+        answer.setAnswerStatus(AnswerStatus.INCORRECT);
+        answerRepository.save(answer);
+    }
+
 
 }

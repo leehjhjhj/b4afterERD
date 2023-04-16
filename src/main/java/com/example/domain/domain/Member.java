@@ -18,6 +18,7 @@ public class Member {
     private Long id;
 
     private int age;
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     public Member(int age) {
